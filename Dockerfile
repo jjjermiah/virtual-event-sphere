@@ -1,16 +1,29 @@
-FROM ghcr.io/prefix-dev/pixi:latest
+FROM ghcr.io/prefix-dev/pixi:0.18.0 AS build
 
-WORKDIR /myapp
+COPY . /app
+WORKDIR /app
+RUN pixi run build-wheel
+RUN pixi run postinstall-production
+RUN pixi shell-hook -e prod > /shell-hook
+RUN echo "uvicorn src.main:app --host 0.0.0.0 --port 8000" >> /shell-hook
 
-COPY . /myapp/
+FROM ubuntu:22.04 AS production
 
-RUN rm -rf .pixi
+# only copy the production env and the shell-hook script to the production image
+COPY --from=build /app/.pixi/envs/prod /app/.pixi/envs/prod
+COPY --from=build /shell-hook /shell-hook
 
-RUN pixi install 
+WORKDIR /app
 
-ENV MODULE_NAME=src.main
-ENV ENTRYPOINT=app
-ENV PORT=8000
 EXPOSE 8000
+CMD ["/bin/bash", "/shell-hook"]
+# RUN rm -rf .pixi
 
-CMD ["sh", "-c", "pixi run uvicorn src.main:app --host 0.0.0.0 --port ${PORT}"]
+# RUN pixi install 
+
+# ENV MODULE_NAME=src.main
+# ENV ENTRYPOINT=app
+
+# EXPOSE 8000
+
+

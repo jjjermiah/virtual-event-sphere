@@ -1,8 +1,8 @@
 import asyncio
 
-from schemas.schema_user import UserOut
-from src.schemas import UserCreate
-from src.crud import (
+from src.ves.schemas.schema_user import UserOut
+from src.ves.schemas import UserCreate
+from src.ves.crud import (
     create_user,
     get_user_by_username,
 )

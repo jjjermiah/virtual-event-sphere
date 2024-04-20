@@ -1,6 +1,6 @@
-from src.db import db
+from src.ves.db import db
 
-from src.schemas import (
+from src.ves.schemas import (
     UserCreate,
     UserOut,
 )
