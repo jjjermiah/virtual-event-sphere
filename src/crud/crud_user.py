@@ -8,6 +8,12 @@ from src.schemas import (
 from typing import Optional
 
 async def create_user(user: UserCreate) -> UserOut:
+    existing_user = await db.users.find_one(
+        filter={"username": user.username}
+    )
+    if existing_user:
+        raise ValueError("Username already exists")
+    
     new_user = user.model_dump()
     await db.users.insert_one(new_user)
     return UserOut(**new_user)

@@ -1,0 +1,7 @@
+{
+    "files.exclude": {
+        "**/.idea": true,
+        "**/.pixi": true,
+        "**/.vscode": true
+    }
+}

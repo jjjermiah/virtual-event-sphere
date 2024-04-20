@@ -16,12 +16,16 @@ from fastapi import (
 router = APIRouter()
 
 @router.post("/users/", response_model=UserCreate)
-async def create_user_route(user: UserCreate) -> UserOut:
-    await asyncio.sleep(2)  # Sleep for 2 seconds
-    return await create_user(user)
+async def create_user_route(user: UserCreate) -> UserOut:   
+    try:
+        new_user = await create_user(user)
+    except ValueError as e:
+        raise HTTPException(status_code=409, detail=str(e))
+    return new_user
+    
 
 @router.get("/users/{username}", response_model=UserCreate)
-async def get_user_by_username_route(
+async def get_user(
     username: str = Path(default=..., example = "johndoe")
 ) -> UserOut:
     user = await get_user_by_username(username)

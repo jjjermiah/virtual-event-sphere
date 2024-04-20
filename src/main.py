@@ -13,4 +13,12 @@ async def lifespan(app: FastAPI):
         print("Stopping application...")
 
 app = FastAPI(lifespan=lifespan)
-app.include_router(users.router, prefix="/api")
+app.include_router(
+    router=users.router, 
+    prefix="/api",
+    tags=["users"]
+)
+
+@app.get(path="/")
+async def read_root():
+    return {"Hello": "World"}

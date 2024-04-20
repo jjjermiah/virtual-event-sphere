@@ -14,12 +14,20 @@ build-backend = "setuptools.build_meta"
 
 [tool.pixi.project]
 channels = ["conda-forge"]
-platforms = ["osx-arm64"]
+platforms = ["osx-arm64", "linux-aarch64"]
 
 [tool.pixi.pypi-dependencies]
 virtual-event-sphere = { path = ".", editable = true }
 
 [tool.pixi.tasks]
+build = { cmd = "docker build -t virtual-event-sphere:latest ."}
+app = { cmd = """\
+    docker run \
+        -p 8000:8000 \
+        -e MONGO_URI=$MONGO_URI \
+        -e MONGO_DB=$MONGO_DB \
+        virtual-event-sphere:latest
+    """, depends_on = ["build"] }
 
 [tool.pixi.dependencies]
 python = ">=3.12.3,<3.13"
