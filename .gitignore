@@ -162,3 +162,4 @@ cython_debug/
 .pixi
 *.egg-info
 
+src/core/config/settings.py

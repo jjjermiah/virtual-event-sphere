@@ -1,10 +1,16 @@
 from fastapi import FastAPI
+from contextlib import asynccontextmanager
 from src.api.v1 import users
 
-app = FastAPI()
-app.include_router(users.router, prefix="/api/v1")
 
-@app.get("/")
-async def read_root() -> dict[str, str]:
-    return {"message": "Hello VirtualEventSphere!"}
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    try:
+        print("Starting application...")
+        yield
+    finally:
+        print("Stopping application...")
+
+app = FastAPI(lifespan=lifespan)
+app.include_router(users.router, prefix="/api")

@@ -1,15 +1,31 @@
-from pydantic import BaseModel, EmailStr, Field
-from typing import Optional
+from pydantic import (
+    BaseModel,
+    ConfigDict, 
+    EmailStr,
+)
 
+# UserCreate is for creating a new user
 class UserCreate(BaseModel):
     name: str
     username: str
     email: EmailStr
 
+    model_config: ConfigDict = {
+        "json_schema_extra" : {
+            "example": {
+                "name": "John Doe",
+                "username": "johndoe",
+                "email": "johndoe@example.com"
+            }
+        }
+    }
+
+# UserOut is for returning a user
 class UserOut(BaseModel):
     username: str
     name: str
     email: EmailStr
     
-    class Config:
-        from_attributes = True
+    model_config: ConfigDict = {
+        "from_attributes": True,
+    }
