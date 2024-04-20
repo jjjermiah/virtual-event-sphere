@@ -1,11 +1,11 @@
-FROM ghcr.io/prefix-dev/pixi:0.18.0 AS build
+FROM ghcr.io/prefix-dev/pixi:latest AS build
 
 COPY . /app
 WORKDIR /app
 RUN pixi run build-wheel
 RUN pixi run postinstall-production
 RUN pixi shell-hook -e prod > /shell-hook
-RUN echo "uvicorn src.main:app --host 0.0.0.0 --port 8000" >> /shell-hook
+RUN echo "uvicorn ves.main:app --host 0.0.0.0 --port 8000" >> /shell-hook
 
 FROM ubuntu:22.04 AS production
 

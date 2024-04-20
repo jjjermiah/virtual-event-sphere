@@ -1,5 +1,5 @@
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
-from src.ves.core.config.settings import (
+from ves.core.config.settings import (
     MONGO_DB,
     MONGO_URI,
 )

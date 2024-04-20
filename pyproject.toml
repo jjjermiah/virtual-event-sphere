@@ -21,33 +21,18 @@ uvicorn = ">=0.29.0,<0.30"
 motor = ">=3.4.0,<3.5"
 email-validator = ">=2.1.1,<2.2"
 
+[tool.pixi.tasks]
+
+
 [tool.pixi.environments]
 default = { features = ["dev", "build"], solve-group = "default" }
-# Leaner environment for use in production
 prod = { features = ["prod"], solve-group = "default" }
 
 [tool.pixi.feature.dev.pypi-dependencies]
 virtual-event-sphere = { path = ".", editable = true }
 
-# We use dependencies from conda to use it to build the wheel
-[tool.pixi.feature.build.dependencies]
-build = "*"
-hatchling = "*"
-
-[tool.pixi.feature.build.tasks]
-# Create a wheel for installation
-build-wheel = "python -m build --no-isolation --wheel ."
-
-# Used for installing into production, as a post-process step
-[tool.pixi.feature.prod.host-dependencies]
-pip = "*"
-
-[tool.pixi.feature.prod.tasks]
-# Install into the production environment
-postinstall-production = "pip install --no-deps --disable-pip-version-check dist/virtual_event_sphere-*.whl"
-
-
-[tool.pixi.tasks]
+[tool.pixi.feature.dev.tasks]
+start = { cmd = "uvicorn ves.main:app --reload" }
 build = { cmd = "docker build -t virtual-event-sphere:latest ."}
 app = { cmd = """\
     docker run \
@@ -57,6 +42,23 @@ app = { cmd = """\
         virtual-event-sphere:latest
     """, depends_on = ["build"] }
 
+[tool.pixi.feature.prod.host-dependencies]
+pip = "*"
+
+[tool.pixi.feature.prod.tasks]
+# Install into the production environment
+postinstall-production = "pip install --no-deps --disable-pip-version-check dist/virtual_event_sphere-*.whl"
+
+###########################################################
+# BUILD RELATED CONFIGURATION
+
+# We use dependencies from conda to use it to build the wheel
+[tool.pixi.feature.build.dependencies]
+build = "*"
+hatchling = "*"
+
+[tool.pixi.feature.build.tasks]
+build-wheel = { cmd = "python -m build --no-isolation --wheel ."}
 
 [build-system]
 requires = ["hatchling"]
@@ -66,3 +68,4 @@ build-backend = "hatchling.build"
 packages = [
     "src/ves",
 ]
+###########################################################

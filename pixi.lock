@@ -1553,7 +1553,7 @@ packages:
   name: virtual-event-sphere
   version: 0.1.0
   path: .
-  sha256: bab1ac929b669ae51e2af26e2f87a94ed4b6436c0b48ccee543424471062837d
+  sha256: eb93e55777465e3fdc057aa4433fd8d66bf401fe5f43f7c8181efc3105fec35b
   requires_dist:
   - pydantic[email]
   requires_python: '>=3.11'

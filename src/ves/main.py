@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
-from src.ves.api.v1 import users
+from ves.api.v1 import users
 
 
 
