@@ -1,0 +1,29 @@
+[project]
+name = "virtual-event-sphere"
+version = "0.1.0"
+description = "Add a short description here"
+authors = [{name = "Jermiah Joseph", email = "jermiahjoseph98@gmail.com"}]
+requires-python = ">= 3.11"
+dependencies = [
+    "pydantic[email]"
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["osx-arm64"]
+
+[tool.pixi.pypi-dependencies]
+virtual-event-sphere = { path = ".", editable = true }
+
+[tool.pixi.tasks]
+
+[tool.pixi.dependencies]
+python = ">=3.12.3,<3.13"
+fastapi = ">=0.110.2,<0.111"
+uvicorn = ">=0.29.0,<0.30"
+motor = ">=3.4.0,<3.5"
+email-validator = ">=2.1.1,<2.2"

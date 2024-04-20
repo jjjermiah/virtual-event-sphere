@@ -4,7 +4,7 @@
 
 <instance-profile id="dn"
                  name="Developer Notes"
-                 start-page="starter-topic.md">
+                 start-page="Project-Description.md">
 
-    <toc-element topic="starter-topic.md"/>
+    <toc-element topic="Project-Description.md"/>
 </instance-profile>
