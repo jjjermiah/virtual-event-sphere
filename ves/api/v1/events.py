@@ -21,7 +21,7 @@ async def create_event_route(event: CreateEvent) -> EventOut:
     return new_event
 
 @router.get("/events/{name}", response_model=EventOut)
-async def get_event_by_name(name: str = Path(..., title="Event Name")) -> EventOut:
+async def get_event_by_name(name: str = Path(default=..., title="Event Name")) -> EventOut:
     event = await get_event_by_name(name)
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")

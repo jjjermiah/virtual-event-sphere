@@ -8,10 +8,10 @@ from ves.schemas import (
 
 from typing import Optional
 
+
 async def create_event(event: CreateEvent) -> EventOut:
-    existing_event = await db.events.find_one(
-        filter={"name": event.name}
-    )
+    existing_event = await get_event_by_name(event.name)
+    
     if existing_event:
         raise ValueError("Event already exists")
     
