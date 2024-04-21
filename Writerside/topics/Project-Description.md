@@ -49,18 +49,14 @@ Allow users to create and manage virtual events
 
 - Design MongoDB schema for user and event management
   - User
+    - name
     - username
     - email
-    - password
-    - created_at
   - Event
-    - event_name
+    - name
     - date
     - time
     - description
-    - link
-    - created_at
-    - updated_at
   - Ticket
     - user_id
     - event_id

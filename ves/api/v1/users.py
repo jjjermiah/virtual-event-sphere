@@ -1,5 +1,4 @@
 import asyncio
-
 from ves.schemas.schema_user import UserOut
 from ves.schemas import UserCreate
 from ves.crud import (

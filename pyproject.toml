@@ -8,8 +8,6 @@ dependencies = [
     "pydantic[email]"
 ]
 
-
-
 [tool.pixi.project]
 channels = ["conda-forge"]
 platforms = ["osx-arm64", "linux-aarch64"]
@@ -23,10 +21,15 @@ email-validator = ">=2.1.1,<2.2"
 
 [tool.pixi.tasks]
 
-
+###########################################################
+# ENVIRONMENTS
+###########################################################
 [tool.pixi.environments]
 default = { features = ["dev", "build"], solve-group = "default" }
 prod = { features = ["prod"], solve-group = "default" }
+
+#---------------------------------------------------------
+# DEVELOPMENT ENVIRONMENT
 
 [tool.pixi.feature.dev.pypi-dependencies]
 virtual-event-sphere = { path = ".", editable = true }
@@ -42,6 +45,9 @@ app = { cmd = """\
         virtual-event-sphere:latest
     """, depends_on = ["build"] }
 
+#---------------------------------------------------------
+# PRODUCTION ENVIRONMENT
+
 [tool.pixi.feature.prod.host-dependencies]
 pip = "*"
 
@@ -51,7 +57,7 @@ postinstall-production = "pip install --no-deps --disable-pip-version-check dist
 
 ###########################################################
 # BUILD RELATED CONFIGURATION
-
+###########################################################
 # We use dependencies from conda to use it to build the wheel
 [tool.pixi.feature.build.dependencies]
 build = "*"
@@ -66,6 +72,6 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = [
-    "src/ves",
+    "ves",
 ]
 ###########################################################

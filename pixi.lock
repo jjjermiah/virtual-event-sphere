@@ -25,7 +25,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/hatchling-1.24.1-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/idna-3.7-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-7.1.0-pyha770c72_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/ld_impl_linux-aarch64-2.40-h2d8c526_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/ld_impl_linux-aarch64-2.40-hba4e955_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libexpat-2.6.2-h2f0025b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libffi-3.4.2-h3557bc0_5.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libgcc-ng-13.2.0-hf8544c7_5.conda
@@ -138,7 +138,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/frozenlist-1.4.1-py312hdd3e373_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/h11-0.14.0-pyhd8ed1ab_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/idna-3.7-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/ld_impl_linux-aarch64-2.40-h2d8c526_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/ld_impl_linux-aarch64-2.40-hba4e955_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libexpat-2.6.2-h2f0025b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libffi-3.4.2-h3557bc0_5.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libgcc-ng-13.2.0-hf8544c7_5.conda
@@ -666,17 +666,16 @@ packages:
 - kind: conda
   name: ld_impl_linux-aarch64
   version: '2.40'
-  build: h2d8c526_0
+  build: hba4e955_0
   subdir: linux-aarch64
-  url: https://conda.anaconda.org/conda-forge/linux-aarch64/ld_impl_linux-aarch64-2.40-h2d8c526_0.conda
-  sha256: 1ba06e8645094b340b4aee23603a6abb1b0383788180e65f3de34e655c5f577c
-  md5: 16246d69e945d0b1969a6099e7c5d457
+  url: https://conda.anaconda.org/conda-forge/linux-aarch64/ld_impl_linux-aarch64-2.40-hba4e955_0.conda
+  sha256: a306f9368b490b5fd926abf42d9a796e1725cbc7c3e631fc404f80a2bf7d1388
+  md5: b55c1cb33c63d23b542fa53f24541e56
   constrains:
   - binutils_impl_linux-aarch64 2.40
   license: GPL-3.0-only
-  license_family: GPL
-  size: 738776
-  timestamp: 1674833843183
+  size: 735254
+  timestamp: 1713651051970
 - kind: conda
   name: libcxx
   version: 16.0.6
@@ -1553,7 +1552,7 @@ packages:
   name: virtual-event-sphere
   version: 0.1.0
   path: .
-  sha256: eb93e55777465e3fdc057aa4433fd8d66bf401fe5f43f7c8181efc3105fec35b
+  sha256: f5dfa951b1656022c6744f79703e65704866285e445c36feaf6aede43af04972
   requires_dist:
   - pydantic[email]
   requires_python: '>=3.11'
