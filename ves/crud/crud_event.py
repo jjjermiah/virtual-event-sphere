@@ -8,7 +8,6 @@ from ves.schemas import (
 
 from typing import Optional
 
-
 async def create_event(event: CreateEvent) -> EventOut:
     existing_event = await get_event_by_name(event.name)
     

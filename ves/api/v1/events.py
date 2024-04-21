@@ -8,7 +8,11 @@ from fastapi import (
     HTTPException,
     Path,
 )
-from ves.crud import create_event, get_event_by_name, get_all_events
+from ves.crud import (
+    create_event, 
+    get_event_by_name, 
+    get_all_events,
+)
 
 router = APIRouter()
 
@@ -21,7 +25,9 @@ async def create_event_route(event: CreateEvent) -> EventOut:
     return new_event
 
 @router.get("/events/{name}", response_model=EventOut)
-async def get_event_by_name(name: str = Path(default=..., title="Event Name")) -> EventOut:
+async def get_event_by_name_route(
+    name: str = Path(default=..., title="Event Name")
+) -> EventOut:
     event = await get_event_by_name(name)
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")

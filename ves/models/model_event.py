@@ -6,7 +6,7 @@ class Event(BaseModel):
     id: Optional[int] = Field(default=None, alias='id')
     name: str
     description: str
-    date: datetime.date
-    time: datetime.time
+    # date: datetime.date
+    # time: datetime.time
     
     
