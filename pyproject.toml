@@ -5,8 +5,11 @@ description = "Add a short description here"
 authors = [{name = "Jermiah Joseph", email = "jermiahjoseph98@gmail.com"}]
 requires-python = ">= 3.11"
 dependencies = [
-    "pydantic[email]"
+    "pydantic[email]",
+    "fastapi-cache2[redis]"
 ]
+
+[project.optional-dependencies]
 
 [tool.pixi.project]
 channels = ["conda-forge"]
@@ -36,14 +39,7 @@ virtual-event-sphere = { path = ".", editable = true }
 
 [tool.pixi.feature.dev.tasks]
 start = { cmd = "uvicorn ves.main:app --reload" }
-build = { cmd = "docker build -t virtual-event-sphere:latest ."}
-app = { cmd = """\
-    docker run \
-        -p 8000:8000 \
-        -e MONGO_URI=$MONGO_URI \
-        -e MONGO_DB=$MONGO_DB \
-        virtual-event-sphere:latest
-    """, depends_on = ["build"] }
+dock = { cmd = "docker-compose up --build" }
 
 #---------------------------------------------------------
 # PRODUCTION ENVIRONMENT

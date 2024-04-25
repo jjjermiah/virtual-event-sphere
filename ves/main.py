@@ -5,14 +5,22 @@ from contextlib import asynccontextmanager
 from ves.api.v1 import users, events
 
 
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.redis import RedisBackend
+from fastapi_cache.decorator import cache
+
+from redis import asyncio as aioredis
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     try:
         print("Starting application...")
+        redis = aioredis.from_url("redis://localhost")
+        FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
         yield
     finally:
         print("Stopping application...")
+
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(
@@ -20,6 +28,8 @@ app.include_router(
     prefix="/api",
     tags=["users"]
 )
+
+
 app.include_router(
     router=events.router, 
     prefix="/api",

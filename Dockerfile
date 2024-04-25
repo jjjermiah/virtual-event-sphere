@@ -5,7 +5,7 @@ WORKDIR /app
 RUN pixi run build-wheel
 RUN pixi run postinstall-production
 RUN pixi shell-hook -e prod > /shell-hook
-RUN echo "uvicorn ves.main:app --host 0.0.0.0 --port 8000" >> /shell-hook
+RUN echo "uvicorn ves.main:app --host 0.0.0.0 --port 8000 --reload" >> /shell-hook
 
 FROM ubuntu:22.04 AS production
 
@@ -17,13 +17,4 @@ WORKDIR /app
 
 EXPOSE 8000
 CMD ["/bin/bash", "/shell-hook"]
-# RUN rm -rf .pixi
-
-# RUN pixi install 
-
-# ENV MODULE_NAME=src.main
-# ENV ENTRYPOINT=app
-
-# EXPOSE 8000
-
 

@@ -12,6 +12,8 @@ from fastapi import (
     Path,
 )
 
+from fastapi_cache.decorator import cache
+
 router = APIRouter()
 
 @router.post("/users/", response_model=UserCreate)
@@ -24,6 +26,7 @@ async def create_user_route(user: UserCreate) -> UserOut:
     
 
 @router.get("/users/{username}", response_model=UserCreate)
+@cache(expire=60)
 async def get_user(
     username: str = Path(default=..., example = "johndoe")
 ) -> UserOut:
@@ -31,3 +34,4 @@ async def get_user(
     if user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return user
+
